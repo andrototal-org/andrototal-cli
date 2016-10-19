@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>local_worker package &mdash; andrototal-cli 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="andrototal-cli 1.0.0 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="local-worker-package">
+<h1>local_worker package<a class="headerlink" href="#local-worker-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="local_worker.core.html">local_worker.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="local_worker.core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_worker.core.html#module-local_worker.core.lockfile">local_worker.core.lockfile module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_worker.core.html#module-local_worker.core.task">local_worker.core.task module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_worker.core.html#module-local_worker.core.task_manager">local_worker.core.task_manager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_worker.core.html#module-local_worker.core.utils">local_worker.core.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_worker.core.html#module-local_worker.core.virtualdevice">local_worker.core.virtualdevice module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_worker.core.html#module-local_worker.core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-local_worker.scan_cli">
+<span id="local-worker-scan-cli-module"></span><h2>local_worker.scan_cli module<a class="headerlink" href="#module-local_worker.scan_cli" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="andrototal-cli">
+<h3>andrototal-cli<a class="headerlink" href="#andrototal-cli" title="Permalink to this headline">¶</a></h3>
+<p>Command line tool for analyzing apk on Android antiviruses.</p>
+<p><strong>Requires:</strong></p>
+<ul class="simple">
+<li>adapers package</li>
+<li>andropilot package</li>
+<li>avds (with the antivirus installed) inside HOME/.android/avd/</li>
+</ul>
+<p><strong>Installation:</strong></p>
+<ul class="simple">
+<li>pip install andrototal-cli</li>
+</ul>
+<p><strong>Basic usage:</strong>
+andrototal-cli path/of/sample/apk NameOfTheAntivirus</p>
+<p><strong>NameOfTheAntivirus:</strong> 
+one from the adapters package(there must exist and avd: name.of.the.antivirus inside HOME/.android/avd/)</p>
+<p><strong>Example:</strong> 
+andrototal-cli malware.apk ComAntivirus</p>
+<dl class="docutils">
+<dt><em>usage</em>: andrototal-cli [-h] [-test-method {install,copy}]</dt>
+<dd>[-log-level {DEBUG,INFO,WARNING,ERROR}]
+[-window [WINDOW]] [-file-log FILE_LOG]
+[-max-retries {1,2,3,4}]
+[-store-device-data [STORE_DEVICE_DATA]]
+malware_sample antivirus [antivirus ...]</dd>
+<dt><em>positional arguments</em>:</dt>
+<dd>malware_sample        path of the apk sample
+antivirus             name of the antivirus</dd>
+</dl>
+<p><em>optional arguments</em>:</p>
+<blockquote>
+<div><p>-h, &#8211;help show this help message and exit</p>
+<dl class="docutils">
+<dt>-test-method {install,copy}, -t {install,copy}</dt>
+<dd>test method</dd>
+<dt>-log-level {DEBUG,INFO,WARNING,ERROR}, -l {DEBUG,INFO,WARNING,ERROR}</dt>
+<dd>logging level.</dd>
+<dt>-window [WINDOW], -w [WINDOW]</dt>
+<dd>display emulator&#8217;s graphical window</dd>
+<dt>-file-log FILE_LOG, -fl FILE_LOG</dt>
+<dd>Redirect logger to file</dd>
+<dt>-max-retries {1,2,3,4}, -m {1,2,3,4}</dt>
+<dd>maximum number of scan retries when a non fatal
+exceptions occurs</dd>
+<dt>-store-device-data [STORE_DEVICE_DATA], -sd [STORE_DEVICE_DATA]</dt>
+<dd>store device logcat and snapshot in device_data folder</dd>
+</dl>
+</div></blockquote>
+<p><strong>output:</strong></p>
+<dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8216;sample&#8217;: {</dt>
+<dd><p class="first">&#8216;sha256&#8217;: &#8216;1944d8ee5bdda3a1bd06555fdb10d3267ab0cc4511d1e40611baf3ce1b81e5e8&#8217;,</p>
+<p>&#8216;md5&#8217;: &#8216;77b0105632e309b48e66f7cdb4678e02&#8217;,</p>
+<p class="last">&#8216;sha1&#8217;: &#8216;4de0d8997949265a4b5647bb9f9d42926bd88191&#8217;</p>
+</dd>
+</dl>
+<p>},</p>
+<p>&#8216;test_count&#8217;: 1,
+&#8216;success_count&#8217;: 1,
+&#8216;tests&#8217;: [</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><p class="first">&#8216;status&#8217;: &#8216;SUCCESS&#8217;,</p>
+<p>&#8216;ended_at&#8217;: &#8216;2016-06-08 14:01:27&#8217;,</p>
+<p>&#8216;detected_threat&#8217;: &#8216;THREAT_FOUND&#8217;,</p>
+<p>&#8216;antivirus&#8217;: &#8216;ComAntivirus&#8217;,</p>
+<p>&#8216;started_at&#8217;: &#8216;2016-06-08 14:00:34&#8217;,</p>
+<p class="last">&#8216;analysis_time&#8217;: 19</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">],
+&#8216;failure_count&#8217;: 0</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="class">
+<dt id="local_worker.scan_cli.ScanCli">
+<em class="property">class </em><code class="descclassname">local_worker.scan_cli.</code><code class="descname">ScanCli</code><a class="headerlink" href="#local_worker.scan_cli.ScanCli" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="local_worker.scan_cli.main">
+<code class="descclassname">local_worker.scan_cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.scan_cli.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-local_worker">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-local_worker" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">local_worker package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-local_worker.scan_cli">local_worker.scan_cli module</a><ul>
+<li><a class="reference internal" href="#andrototal-cli">andrototal-cli</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-local_worker">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/local_worker.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, andrototal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/local_worker.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

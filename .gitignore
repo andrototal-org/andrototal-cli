@@ -1,0 +1,12 @@
+*.py[cod]
+
+*~
+*.log
+
+_build
+_static
+_templates
+
+
+# Android files
+*.apk

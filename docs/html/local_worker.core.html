@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>local_worker.core package &mdash; andrototal-cli 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="andrototal-cli 1.0.0 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="local-worker-core-package">
+<h1>local_worker.core package<a class="headerlink" href="#local-worker-core-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-local_worker.core.lockfile">
+<span id="local-worker-core-lockfile-module"></span><h2>local_worker.core.lockfile module<a class="headerlink" href="#module-local_worker.core.lockfile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="local_worker.core.lockfile.FileLock">
+<em class="property">class </em><code class="descclassname">local_worker.core.lockfile.</code><code class="descname">FileLock</code><span class="sig-paren">(</span><em>file_name</em>, <em>timeout=20</em>, <em>delay=0.05</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.lockfile.FileLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>A file locking mechanism that has context-manager support so
+you can use it in a with statement. This should be relatively cross
+compatible as it doesn&#8217;t rely on msvcrt or fcntl for the locking.</p>
+<dl class="method">
+<dt id="local_worker.core.lockfile.FileLock.acquire">
+<code class="descname">acquire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.lockfile.FileLock.acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquire the lock, if possible. If the lock is in use, check again
+every <cite>wait</cite> seconds. It does this until it either gets the lock or
+exceeds <cite>timeout</cite> number of seconds, in which case it throws
+an exception.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.lockfile.FileLock.release">
+<code class="descname">release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.lockfile.FileLock.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get rid of the lock by deleting the lockfile.
+When working in a <cite>with</cite> statement, this gets automatically
+called at the end.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="local_worker.core.lockfile.FileLockException">
+<em class="property">exception </em><code class="descclassname">local_worker.core.lockfile.</code><code class="descname">FileLockException</code><a class="headerlink" href="#local_worker.core.lockfile.FileLockException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-local_worker.core.task">
+<span id="local-worker-core-task-module"></span><h2>local_worker.core.task module<a class="headerlink" href="#module-local_worker.core.task" title="Permalink to this headline">¶</a></h2>
+<p>this module contains the Task class, which handles a scan for a given sample
+on one ativirus inside a virtual device</p>
+<dl class="class">
+<dt id="local_worker.core.task.Task">
+<em class="property">class </em><code class="descclassname">local_worker.core.task.</code><code class="descname">Task</code><span class="sig-paren">(</span><em>sample_path</em>, <em>test</em>, <em>window</em>, <em>antivirus_info</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task.Task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>the Task object handles the scan procedure
+for a given sample on one antivirus.
+Every scan will start a virtual device
+and interract with an adapter object
+in order to get the scan results.</p>
+<dl class="method">
+<dt id="local_worker.core.task.Task.cleanup_files">
+<code class="descname">cleanup_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task.Task.cleanup_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete the user-data of the virtualdevice</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.task.Task.failure">
+<code class="descname">failure</code><span class="sig-paren">(</span><em>excetpion</em>, <em>traceback</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task.Task.failure" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the scan status to &#8220;FAILURE&#8221; and its failure cause</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.task.Task.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task.Task.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>run the avd, which contains the given antivirus, and 
+run the scan on the sample</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p class="first">the scan result: NO_THREAT_FOUND, THREAD_FOUND or the name of the malware</p>
+</li>
+<li><dl class="first docutils">
+<dt>scan status: SUCCESS with termination time or FAILURE with the cause of the failuer</dt>
+<dd><p class="first last">(traceback of an exception)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.task.Task.set_result">
+<code class="descname">set_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task.Task.set_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the scan status to &#8220;SUCCESS&#8221; and its termination time</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-local_worker.core.task_manager">
+<span id="local-worker-core-task-manager-module"></span><h2>local_worker.core.task_manager module<a class="headerlink" href="#module-local_worker.core.task_manager" title="Permalink to this headline">¶</a></h2>
+<p>this module contains the TaskManager class, which handles a queue of scans
+of a given sample on one or more antiviruses.</p>
+<dl class="class">
+<dt id="local_worker.core.task_manager.TaskManager">
+<em class="property">class </em><code class="descclassname">local_worker.core.task_manager.</code><code class="descname">TaskManager</code><span class="sig-paren">(</span><em>sample_path</em>, <em>avs</em>, <em>test_method</em>, <em>window</em>, <em>max_retries</em>, <em>store_logcat_snapshot</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task_manager.TaskManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>the TaskManager object handles one or more scans for a malware sample
+on one or more antiviruses.</p>
+<dl class="method">
+<dt id="local_worker.core.task_manager.TaskManager.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task_manager.TaskManager.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>run the scans for every antivirus
+each scan can be retried &#8220;max_retries&#8221; times when
+ScanTimeout, FileLockException or AVDStartTimeOut occurs.</p>
+<blockquote>
+<div>After &#8220;max_retries&#8221; attempts or when another exception occurs</div></blockquote>
+<p>the scan will fail.
+When one of the retriable exception occurs (ScanTimeout, FileLockException 
+or AVDStartTimeOut) the retry will be delayed according to the values</p>
+<blockquote>
+<div><p>returned from &#8220;get_delays(ex_name)&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">dictionary with the result of each scan</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="local_worker.core.task_manager.get_delay">
+<code class="descclassname">local_worker.core.task_manager.</code><code class="descname">get_delay</code><span class="sig-paren">(</span><em>ex_name</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.task_manager.get_delay" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a dictionary of delay values (in seconds) used for retriable exceptions of scans</td>
+</tr>
+</tbody>
+</table>
+<p>{&#8216;ScanTimeout&#8217; : 3, &#8216;FileLockException&#8217; : 60, &#8216;AVDStartTimeOut&#8217; : 30}</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-local_worker.core.utils">
+<span id="local-worker-core-utils-module"></span><h2>local_worker.core.utils module<a class="headerlink" href="#module-local_worker.core.utils" title="Permalink to this headline">¶</a></h2>
+<p>this module contains some utility functions for the command line tool</p>
+<dl class="function">
+<dt id="local_worker.core.utils.APKFileType">
+<code class="descclassname">local_worker.core.utils.</code><code class="descname">APKFileType</code><span class="sig-paren">(</span><em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.APKFileType" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the file is an apk</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">path object of the apk</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="local_worker.core.utils.AV">
+<em class="property">class </em><code class="descclassname">local_worker.core.utils.</code><code class="descname">AV</code><span class="sig-paren">(</span><em>av_name</em>, <em>avd_name</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.AV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>the AV object contains its adapter and avd name</p>
+<p>Example: ComAntivirus and com.antivirus</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="local_worker.core.utils.AVTypeAction">
+<em class="property">class </em><code class="descclassname">local_worker.core.utils.</code><code class="descname">AVTypeAction</code><span class="sig-paren">(</span><em>option_strings</em>, <em>dest</em>, <em>nargs=None</em>, <em>const=None</em>, <em>default=None</em>, <em>type=None</em>, <em>choices=None</em>, <em>required=False</em>, <em>help=None</em>, <em>metavar=None</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.AVTypeAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">argparse.Action</span></code></p>
+<p>the AVTypeAction defines a custom action when parsing an antivirus name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="local_worker.core.utils.get_av_avd_name">
+<code class="descclassname">local_worker.core.utils.</code><code class="descname">get_av_avd_name</code><span class="sig-paren">(</span><em>av_name</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.get_av_avd_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert the adapter name to its corresponding avd name</p>
+<p>Example: ComAntivirus to com.antivirus</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="local_worker.core.utils.get_hashes">
+<code class="descclassname">local_worker.core.utils.</code><code class="descname">get_hashes</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.get_hashes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">sha256, sha1 and md5 of the file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="local_worker.core.utils.import_module">
+<code class="descclassname">local_worker.core.utils.</code><code class="descname">import_module</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.import_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>import module by absolute name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="local_worker.core.utils.import_test_by_name">
+<code class="descclassname">local_worker.core.utils.</code><code class="descname">import_test_by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.import_test_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>import the test module by its name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="local_worker.core.utils.pick_unused_port">
+<code class="descclassname">local_worker.core.utils.</code><code class="descname">pick_unused_port</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.utils.pick_unused_port" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open and close a random socket returning its port number.
+Note that calling this method does not guarantee the port
+will actually be free when used.</p>
+<p>TODO: implement a global lock to avoid at least
+other worker instances from stealing the socket port</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a (probably) free socket port</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-local_worker.core.virtualdevice">
+<span id="local-worker-core-virtualdevice-module"></span><h2>local_worker.core.virtualdevice module<a class="headerlink" href="#module-local_worker.core.virtualdevice" title="Permalink to this headline">¶</a></h2>
+<p>this module contains the AVD class which represents a virtual device,
+notice that for obvious reasons the fetch_stuff thing has been removed
+in place of that there&#8217;s a centralized update system wich rsyncs files after
+update of the images [one service less...]</p>
+<dl class="class">
+<dt id="local_worker.core.virtualdevice.AVD">
+<em class="property">class </em><code class="descclassname">local_worker.core.virtualdevice.</code><code class="descname">AVD</code><span class="sig-paren">(</span><em>avd='default'</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>the AVD object represents instances of virtual devices</p>
+<dl class="attribute">
+<dt id="local_worker.core.virtualdevice.AVD.PORTS_REGEX">
+<code class="descname">PORTS_REGEX</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x218f600&gt;</em><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.PORTS_REGEX" title="Permalink to this definition">¶</a></dt>
+<dd><p>this class defines a virtual device
+allows spawning an emulator instance
+send adb commands, wait for boot and
+close when needed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.virtualdevice.AVD.adb_command">
+<code class="descname">adb_command</code><span class="sig-paren">(</span><em>cmd</em>, <em>stdin=None</em>, <em>stdout=None</em>, <em>stderr=None</em>, <em>blocking=True</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.adb_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.virtualdevice.AVD.adb_connect">
+<code class="descname">adb_connect</code><span class="sig-paren">(</span><em>timeout=45</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.adb_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>connect and forward adb connection to a localhost port</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="local_worker.core.virtualdevice.AVD.adb_restart">
+<em class="property">static </em><code class="descname">adb_restart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.adb_restart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.virtualdevice.AVD.close">
+<code class="descname">close</code><span class="sig-paren">(</span><em>graceful=False</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>close instance of the emulator</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="local_worker.core.virtualdevice.AVD.get_avds">
+<em class="property">static </em><code class="descname">get_avds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.get_avds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of available AVDs.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="local_worker.core.virtualdevice.AVD.get_instances">
+<em class="property">static </em><code class="descname">get_instances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.get_instances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of devices for which adb has been forwarded
+on a localhost port.
+Does not filter by status (e.g. offline).</p>
+<p>Example:</p>
+<p>$ adb devices
+* daemon not running. starting it now on port 5037 *
+* daemon started successfully *
+List of devices attached
+027c10494100b4d7    device
+localhost:5555   offline
+localhost:5559   device</p>
+<p>will return: (&#8216;localhost:5555&#8217;, &#8216;localhost:5559&#8217;)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.virtualdevice.AVD.start">
+<code class="descname">start</code><span class="sig-paren">(</span><em>timeout=60</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the emulator, kwargs will be the list of options passed to
+the emulator [defaults in self.opts]
+you can use the underscore as arg name, for example:
+to set no-window you pass the argument no_window=True</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="local_worker.core.virtualdevice.AVD.wait_for_boot">
+<code class="descname">wait_for_boot</code><span class="sig-paren">(</span><em>timeout=45</em><span class="sig-paren">)</span><a class="headerlink" href="#local_worker.core.virtualdevice.AVD.wait_for_boot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="local_worker.core.virtualdevice.AVDNotFound">
+<em class="property">exception </em><code class="descclassname">local_worker.core.virtualdevice.</code><code class="descname">AVDNotFound</code><a class="headerlink" href="#local_worker.core.virtualdevice.AVDNotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="local_worker.core.virtualdevice.AVDNumberLimit">
+<em class="property">exception </em><code class="descclassname">local_worker.core.virtualdevice.</code><code class="descname">AVDNumberLimit</code><a class="headerlink" href="#local_worker.core.virtualdevice.AVDNumberLimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="local_worker.core.virtualdevice.AVDStartError">
+<em class="property">exception </em><code class="descclassname">local_worker.core.virtualdevice.</code><code class="descname">AVDStartError</code><a class="headerlink" href="#local_worker.core.virtualdevice.AVDStartError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="local_worker.core.virtualdevice.AVDStartTimeOut">
+<em class="property">exception </em><code class="descclassname">local_worker.core.virtualdevice.</code><code class="descname">AVDStartTimeOut</code><a class="headerlink" href="#local_worker.core.virtualdevice.AVDStartTimeOut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-local_worker.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-local_worker.core" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">local_worker.core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-local_worker.core.lockfile">local_worker.core.lockfile module</a></li>
+<li><a class="reference internal" href="#module-local_worker.core.task">local_worker.core.task module</a></li>
+<li><a class="reference internal" href="#module-local_worker.core.task_manager">local_worker.core.task_manager module</a></li>
+<li><a class="reference internal" href="#module-local_worker.core.utils">local_worker.core.utils module</a></li>
+<li><a class="reference internal" href="#module-local_worker.core.virtualdevice">local_worker.core.virtualdevice module</a></li>
+<li><a class="reference internal" href="#module-local_worker.core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/local_worker.core.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, andrototal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/local_worker.core.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
