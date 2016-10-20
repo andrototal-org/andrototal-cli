@@ -10,7 +10,7 @@ Command line tool for analyzing apk on Android antiviruses.
 
 **Installation:**
 
-- pip install andrototal-cli --process-dependency-links
+- easy_install andrototal-cli 
 
 **Basic usage:**
 andrototal-cli path/of/sample/apk NameOfTheAntivirus
